@@ -48,12 +48,12 @@ export function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Hintergrund-Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-300 via-yellow-200 to-lime-200" />
+      <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-yellow-50 to-stone-100" />
 
       {/* Dekorative Kreise */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-amber-400/30 blur-3xl" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-lime-300/40 blur-3xl" />
-      <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-yellow-300/20 blur-2xl" />
+      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-amber-300/30 blur-3xl" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-yellow-200/40 blur-3xl" />
+      <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-amber-200/20 blur-2xl" />
 
       {/* Karte */}
       <motion.div
