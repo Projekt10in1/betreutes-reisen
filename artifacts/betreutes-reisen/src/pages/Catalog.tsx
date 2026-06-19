@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, MapPin, Accessibility, Footprints, HeartPulse, Euro } from "lucide-react";
+import { CalendarDays, MapPin, Accessibility, Footprints, HeartPulse } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
@@ -111,15 +111,7 @@ export function Catalog() {
                         </div>
                       </CardContent>
 
-                      <CardFooter className="flex justify-between items-center bg-muted/30 pt-6">
-                        <div className="flex items-center font-bold text-xl">
-                          {trip.price ? (
-                            <>
-                              <Euro className="w-5 h-5 mr-1" />
-                              {trip.price}
-                            </>
-                          ) : "Auf Anfrage"}
-                        </div>
+                      <CardFooter className="flex justify-end items-center bg-muted/30 pt-6">
                         <Link href={`/kontakt?trip=${trip.id}`}>
                           <Button className="font-bold" data-testid={`button-inquire-${trip.id}`}>
                             Anfragen

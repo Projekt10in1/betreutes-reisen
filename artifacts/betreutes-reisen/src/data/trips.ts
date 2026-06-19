@@ -10,7 +10,6 @@ export interface Trip {
   imageUrl: string;
   duration: string | null;
   destination: string | null;
-  price: string | null;
   wheelchairAccessible: boolean;
   walkingAidFriendly: boolean;
   highCareNeed: boolean;
@@ -24,7 +23,7 @@ export const trips: Trip[] = [
     description: "Erleben Sie die atemberaubende Küste der Algarve mit barrierefreien Strandpromenaden, pittoresken Fischerorten und sonnigem Atlantikklima. Unsere Fachkräfte begleiten Sie liebevoll auf Schritt und Tritt.",
     quarter: "Q1", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800",
-    duration: "10 Tage", destination: "Algarve, Portugal", price: "ab 2.490 €",
+    duration: "10 Tage", destination: "Algarve, Portugal",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -33,7 +32,7 @@ export const trips: Trip[] = [
     description: "Mallorcas sanfte Landschaften, mild-mediterrane Luft und barrierefreie Promenaden machen diese Reise zu einem unvergesslichen Erlebnis. Inklusive behindertengerechter Unterkunft direkt am Meer.",
     quarter: "Q1", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1509233725247-49e657c54213?w=800",
-    duration: "8 Tage", destination: "Mallorca, Spanien", price: "ab 2.190 €",
+    duration: "8 Tage", destination: "Mallorca, Spanien",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   // Q1 – Kurztrips
@@ -43,7 +42,7 @@ export const trips: Trip[] = [
     description: "Genießen Sie ein festliches Konzert im prachtvollen Kurhaus mit Klassik und leichter Unterhaltungsmusik. Wir kümmern uns um Anreise, Platzierung und Ihre individuellen Bedürfnisse.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800",
-    duration: "Tagesausflug", destination: "Wiesbaden", price: "ab 89 €",
+    duration: "Tagesausflug", destination: "Wiesbaden",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -52,7 +51,7 @@ export const trips: Trip[] = [
     description: "Duftende Blumen, bunte Marktstände und frische Frühlingsluft – ein Spaziergang durch einen der schönsten Wochenmärkte der Region. Gemütlicher Mittagsimbiss inklusive.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800",
-    duration: "Tagesausflug", destination: "Frankfurt am Main", price: "ab 65 €",
+    duration: "Tagesausflug", destination: "Frankfurt am Main",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -61,7 +60,7 @@ export const trips: Trip[] = [
     description: "Ein ruhiger Nachmittag zwischen blühenden Pflanzen, Gewächshäusern und duftenden Rosen. Ideal für Menschen, die Natur und Stille genießen möchten.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800",
-    duration: "Halbtagesausflug", destination: "München", price: "ab 55 €",
+    duration: "Halbtagesausflug", destination: "München",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -70,7 +69,7 @@ export const trips: Trip[] = [
     description: "Kaffee und Kuchen in einem historischen Schloss – Genuss mit Stil. Ein festlicher Nachmittag mit Panoramablick auf den Park.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-    duration: "Nachmittagsausflug", destination: "Heidelberg", price: "ab 45 €",
+    duration: "Nachmittagsausflug", destination: "Heidelberg",
     wheelchairAccessible: true, walkingAidFriendly: false, highCareNeed: false,
   },
   {
@@ -79,7 +78,7 @@ export const trips: Trip[] = [
     description: "Ein unterhaltsamer Theaterabend mit einer leichtfüßigen deutschen Komödie. Wir reservieren Sitzplätze mit bester Sicht und sorgen für eine angenehme An- und Abreise.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1503095396549-807759245b35?w=800",
-    duration: "Abendausflug", destination: "Stuttgart", price: "ab 79 €",
+    duration: "Abendausflug", destination: "Stuttgart",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -88,7 +87,7 @@ export const trips: Trip[] = [
     description: "Eine entspannte Rheinfahrt vorbei an Weinbergen, Burgen und malerischen Städtchen. Inklusive Mittagessen an Bord.",
     quarter: "Q1", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-    duration: "Tagesausflug", destination: "Koblenz – Rüdesheim", price: "ab 95 €",
+    duration: "Tagesausflug", destination: "Koblenz – Rüdesheim",
     wheelchairAccessible: true, walkingAidFriendly: false, highCareNeed: true,
   },
   // Q2 – Fernreisen
@@ -98,7 +97,7 @@ export const trips: Trip[] = [
     description: "Entdecken Sie das Herz Italiens: sanfte Hügel, historische Städte wie Siena und Florenz, und die berühmten Weingüter der Chianti-Region. Barrierefrei und liebevoll begleitet.",
     quarter: "Q2", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800",
-    duration: "12 Tage", destination: "Toskana, Italien", price: "ab 2.890 €",
+    duration: "12 Tage", destination: "Toskana, Italien",
     wheelchairAccessible: false, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -107,7 +106,7 @@ export const trips: Trip[] = [
     description: "Der Wolfgangsee, der Hallstätter See und die grünen Alpenwiesen laden zur Erholung ein. Inklusive Schifffahrt und traditionellem Heurigenbesuch.",
     quarter: "Q2", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-    duration: "9 Tage", destination: "Salzkammergut, Österreich", price: "ab 2.290 €",
+    duration: "9 Tage", destination: "Salzkammergut, Österreich",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   // Q2 – Kurztrips
@@ -117,7 +116,7 @@ export const trips: Trip[] = [
     description: "Spannung und Eleganz auf der Galopprennbahn: Ein aufregender Tag mit festlicher Atmosphäre. Wir sorgen für angenehme Sitzplätze und persönliche Betreuung.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1534515812534-1f9dc741e0c6?w=800",
-    duration: "Tagesausflug", destination: "Hamburg", price: "ab 99 €",
+    duration: "Tagesausflug", destination: "Hamburg",
     wheelchairAccessible: true, walkingAidFriendly: false, highCareNeed: false,
   },
   {
@@ -126,7 +125,7 @@ export const trips: Trip[] = [
     description: "Tausende von Blumen, Gartenanlagen und Kunstinstallationen auf einem barrierefreien Gelände. Ein Fest für Augen und Seele.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800",
-    duration: "Tagesausflug", destination: "Wangen im Allgäu", price: "ab 59 €",
+    duration: "Tagesausflug", destination: "Wangen im Allgäu",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -135,7 +134,7 @@ export const trips: Trip[] = [
     description: "Entdecken Sie das historische Stadtzentrum mit seinen Fachwerkhäusern, Brunnen und dem belebten Marktplatz. Gemütlicher Abschluss bei Kaffee und Torte.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800",
-    duration: "Halbtagesausflug", destination: "Rothenburg ob der Tauber", price: "ab 49 €",
+    duration: "Halbtagesausflug", destination: "Rothenburg ob der Tauber",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -144,7 +143,7 @@ export const trips: Trip[] = [
     description: "Ein wunderschöner Nachmittag mit frischer Luft, selbst zubereiteten Leckereien und guter Gesellschaft. Rollstuhlgerechte Wege durch den Park.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1523301343968-6a6ebf63c672?w=800",
-    duration: "Halbtagesausflug", destination: "Berlin", price: "ab 39 €",
+    duration: "Halbtagesausflug", destination: "Berlin",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -153,7 +152,7 @@ export const trips: Trip[] = [
     description: "Ein entspannter Tag im barrierefreien Tierpark – nah an der Natur, mit liebevollen Tieren und frischer Luft. Für alle Generationen ein Erlebnis.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=800",
-    duration: "Tagesausflug", destination: "Hannover", price: "ab 55 €",
+    duration: "Tagesausflug", destination: "Hannover",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -162,7 +161,7 @@ export const trips: Trip[] = [
     description: "Ein gemütlicher Nachmittag in einem familiengeführten Weingut mit Probe regionaler Weine und einem kleinen Imbiss. Wunderschöne Kulisse inmitten der Weinberge.",
     quarter: "Q2", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800",
-    duration: "Nachmittagsausflug", destination: "Rheinland-Pfalz", price: "ab 69 €",
+    duration: "Nachmittagsausflug", destination: "Rheinland-Pfalz",
     wheelchairAccessible: false, walkingAidFriendly: true, highCareNeed: false,
   },
   // Q3 – Fernreisen
@@ -172,7 +171,7 @@ export const trips: Trip[] = [
     description: "Kristallklares Wasser, malerische Altstädte und entspannte Atmosphäre. Dubrovnik, Split und die Inselwelt der Adria barrierefrei erleben.",
     quarter: "Q3", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800",
-    duration: "10 Tage", destination: "Dalmatien, Kroatien", price: "ab 2.690 €",
+    duration: "10 Tage", destination: "Dalmatien, Kroatien",
     wheelchairAccessible: false, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -181,7 +180,7 @@ export const trips: Trip[] = [
     description: "Majestätische Fjorde, grüne Bergwälder und das einzigartige nordische Licht. Eine Reise für alle, die die pure Kraft der Natur erleben möchten – mit 24/7-Pflegebegleitung.",
     quarter: "Q3", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1518638150340-f706e86654de?w=800",
-    duration: "14 Tage", destination: "Westnorwegen", price: "ab 3.490 €",
+    duration: "14 Tage", destination: "Westnorwegen",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   // Q3 – Kurztrips
@@ -191,7 +190,7 @@ export const trips: Trip[] = [
     description: "Musik unter freiem Himmel – ein Abend mit klassischen Melodien und Volksmusik. Gemütliche Sitzplätze unter alten Bäumen.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800",
-    duration: "Abendausflug", destination: "München", price: "ab 75 €",
+    duration: "Abendausflug", destination: "München",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -200,7 +199,7 @@ export const trips: Trip[] = [
     description: "Frische Meeresluft, Muscheln sammeln und gemütliches Strandkorbsitzen. Ein unvergesslicher Tag an der deutschen Nordseeküste mit barrierefreiem Strandzugang.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-    duration: "Tagesausflug", destination: "St. Peter-Ording", price: "ab 89 €",
+    duration: "Tagesausflug", destination: "St. Peter-Ording",
     wheelchairAccessible: true, walkingAidFriendly: false, highCareNeed: false,
   },
   {
@@ -209,7 +208,7 @@ export const trips: Trip[] = [
     description: "Dirndl, Brezeln und Blasmusik – das Volksfest mit persönlicher Begleitung. Wir sorgen dafür, dass Sie sich in der Menge sicher fühlen und alles genießen können.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800",
-    duration: "Tagesausflug", destination: "München", price: "ab 85 €",
+    duration: "Tagesausflug", destination: "München",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -218,7 +217,7 @@ export const trips: Trip[] = [
     description: "Kunst, Geschichte und Kultur vereint in einer spannenden Ausstellung. Wir führen Sie individuell durch die Räume – in Ihrem Tempo.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=800",
-    duration: "Tagesausflug", destination: "Nürnberg", price: "ab 59 €",
+    duration: "Tagesausflug", destination: "Nürnberg",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -227,7 +226,7 @@ export const trips: Trip[] = [
     description: "Frische Äpfel, duftende Erde und das Fest der Ernte – ein herzlicher Tag auf einem familiengeführten Biobauernhof.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800",
-    duration: "Tagesausflug", destination: "Baden-Württemberg", price: "ab 49 €",
+    duration: "Tagesausflug", destination: "Baden-Württemberg",
     wheelchairAccessible: false, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -236,7 +235,7 @@ export const trips: Trip[] = [
     description: "Der Sonnenuntergang über dem Bodensee ist ein unvergessliches Erlebnis. Wir begleiten Sie auf einem gemütlichen Abendspaziergang mit Abendessen am See.",
     quarter: "Q3", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=800",
-    duration: "Abendausflug", destination: "Konstanz", price: "ab 79 €",
+    duration: "Abendausflug", destination: "Konstanz",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   // Q4 – Fernreisen
@@ -246,7 +245,7 @@ export const trips: Trip[] = [
     description: "Sonne, Wärme und Entspannung auf Gran Canaria oder Teneriffa. Der perfekte Ausweg aus dem grauen Herbst – mit 24-Stunden-Pflegebegleitung in barrierefreien Hotelanlagen.",
     quarter: "Q4", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800",
-    duration: "10 Tage", destination: "Gran Canaria, Spanien", price: "ab 2.590 €",
+    duration: "10 Tage", destination: "Gran Canaria, Spanien",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -255,7 +254,7 @@ export const trips: Trip[] = [
     description: "Weihnachtsmärkte, Kaffeehauskultur und die prächtige Adventsatmosphäre der Kaiserstadt Wien. Konzertbesuch im Musikverein inklusive.",
     quarter: "Q4", type: "long",
     imageUrl: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800",
-    duration: "8 Tage", destination: "Wien, Österreich", price: "ab 2.390 €",
+    duration: "8 Tage", destination: "Wien, Österreich",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   // Q4 – Kurztrips
@@ -265,7 +264,7 @@ export const trips: Trip[] = [
     description: "Glühwein, gebrannte Mandeln und festliche Lichter – der klassische Weihnachtsmarktbesuch in persönlicher Begleitung. Warm einpacken und genießen!",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=800",
-    duration: "Nachmittagsausflug", destination: "Nürnberg", price: "ab 59 €",
+    duration: "Nachmittagsausflug", destination: "Nürnberg",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -274,7 +273,7 @@ export const trips: Trip[] = [
     description: "Kerzenflackern, Orgelklang und die Stille des Advent – ein festliches Konzert in einer der schönsten Kirchen Deutschlands.",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1513829596324-4bb2800c5efb?w=800",
-    duration: "Abendausflug", destination: "Köln", price: "ab 69 €",
+    duration: "Abendausflug", destination: "Köln",
     wheelchairAccessible: true, walkingAidFriendly: false, highCareNeed: false,
   },
   {
@@ -283,7 +282,7 @@ export const trips: Trip[] = [
     description: "Frohe Stimmung und schöne Melodien bei einer festlichen Schlagergala zum Jahresabschluss. Inklusive festlichem Menü und Sektempfang.",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=800",
-    duration: "Tagesausflug", destination: "Düsseldorf", price: "ab 99 €",
+    duration: "Tagesausflug", destination: "Düsseldorf",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -292,7 +291,7 @@ export const trips: Trip[] = [
     description: "Der Nikolaus kommt zu Besuch! Ein herzlicher Nachmittag mit Gedichten, kleinen Geschenken und weihnachtlichen Liedern.",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1448317971280-6c74e016e49c?w=800",
-    duration: "Nachmittagsausflug", destination: "Freiburg", price: "ab 35 €",
+    duration: "Nachmittagsausflug", destination: "Freiburg",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
   {
@@ -301,7 +300,7 @@ export const trips: Trip[] = [
     description: "Spaß auf dem Eis – auch für Menschen mit Mobilitätseinschränkungen. Begleitetes Schlittenfahren und Eiskaffee in der beheizten Hütte.",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1519766304817-4f37bda74a26?w=800",
-    duration: "Tagesausflug", destination: "Hamburg", price: "ab 55 €",
+    duration: "Tagesausflug", destination: "Hamburg",
     wheelchairAccessible: false, walkingAidFriendly: true, highCareNeed: false,
   },
   {
@@ -310,7 +309,7 @@ export const trips: Trip[] = [
     description: "Ein festlicher Brunch zum Jahresende in elegantem Ambiente. Ausgewählte Speisen, gute Gespräche und ein herzliches Miteinander.",
     quarter: "Q4", type: "short",
     imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
-    duration: "Halbtagesausflug", destination: "Dresden", price: "ab 79 €",
+    duration: "Halbtagesausflug", destination: "Dresden",
     wheelchairAccessible: true, walkingAidFriendly: true, highCareNeed: true,
   },
 ];
