@@ -4,12 +4,10 @@ import { Link } from "wouter";
 export function Agb() {
   return (
     <Layout>
-      <div className="bg-accent/20 py-12 border-b">
+      <div className="bg-amber-50 py-16 border-b border-amber-100">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Allgemeine Geschäftsbedingungen (AGB)</h1>
-          <p className="text-xl text-muted-foreground">
-            Gültig für alle Reiseangebote und Dienstleistungen von betreutes-reisen.org
-          </p>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-amber-950 mb-4">Allgemeine Geschäftsbedingungen (AGB)</h1>
+          <p className="text-xl text-amber-900/70">Gültig für alle Reiseangebote und Dienstleistungen von betreutes-reisen.org</p>
         </div>
       </div>
 

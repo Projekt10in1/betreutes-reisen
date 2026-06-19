@@ -33,27 +33,28 @@ export function Header() {
           <span className="font-bold text-xl tracking-tight">betreutes-reisen.org</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-1">
           <Link href="/" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Startseite</Link>
           <Link href="/reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Reisen</Link>
+          <Link href="/letzte-reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Erfahrungen</Link>
           <Link href="/ueber-uns" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Über uns</Link>
           <Link href="/kontakt" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Kontakt</Link>
         </nav>
 
         <div className="flex items-center gap-2" aria-label="Schriftgröße anpassen">
-          <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={() => changeFontSize(-2)} 
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => changeFontSize(-2)}
             aria-label="Schrift verkleinern"
             className="w-12 h-12 rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/10 text-lg font-bold"
           >
             A-
           </Button>
-          <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={() => changeFontSize(2)} 
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => changeFontSize(2)}
             aria-label="Schrift vergrößern"
             className="w-12 h-12 rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/10 text-lg font-bold"
           >

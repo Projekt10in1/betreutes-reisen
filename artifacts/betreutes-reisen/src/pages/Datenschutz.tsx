@@ -3,16 +3,14 @@ import { Layout } from "@/components/layout/Layout";
 export function Datenschutz() {
   return (
     <Layout>
-      <div className="bg-accent/20 py-12 border-b">
+      <div className="bg-amber-50 py-16 border-b border-amber-100">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Datenschutzerklärung</h1>
-          <p className="text-xl text-muted-foreground">
-            Informationen gemäß Art. 13 DSGVO
-          </p>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-amber-950 mb-4">Datenschutzerklärung</h1>
+          <p className="text-xl text-amber-900/70">Informationen gemäß Art. 13 DSGVO</p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 max-w-3xl">
+      <div className="container mx-auto px-4 py-16 max-w-3xl bg-slate-50 min-h-screen">
         <div className="bg-card border rounded-2xl p-8 md:p-12 shadow-sm space-y-10">
 
           <section>

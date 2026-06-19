@@ -137,16 +137,16 @@ export function Contact() {
 
   return (
     <Layout>
-      <div className="bg-accent/20 py-12 border-b">
+      <div className="bg-amber-50 py-16 border-b border-amber-100">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Kennenlern-Anfrage</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-amber-950 mb-4">Kennenlern-Anfrage</h1>
+          <p className="text-xl text-amber-900/70 max-w-2xl mx-auto leading-relaxed">
             Wir freuen uns darauf, Sie kennenzulernen. Teilen Sie uns Ihre Wünsche mit, und wir melden uns persönlich bei Ihnen.
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 max-w-3xl">
+      <div className="container mx-auto px-4 py-16 max-w-3xl bg-slate-50 min-h-screen">
         {isSuccess ? (
           <Card className="border-secondary border-2 bg-secondary/5">
             <CardContent className="pt-10 pb-10 text-center flex flex-col items-center">
@@ -369,7 +369,7 @@ export function Contact() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full h-14 text-lg font-bold"
+                  className="w-full h-14 text-lg font-bold bg-amber-400 hover:bg-amber-500 text-amber-950 rounded-full"
                   disabled={isSubmitting}
                   data-testid="button-submit"
                 >
