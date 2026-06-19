@@ -29,6 +29,9 @@ export function Footer() {
               <li>
                 <Link href="/datenschutz" className="text-muted-foreground hover:text-primary transition-colors py-2 block">Datenschutzerklärung</Link>
               </li>
+              <li>
+                <Link href="/agb" className="text-muted-foreground hover:text-primary transition-colors py-2 block">AGB</Link>
+              </li>
             </ul>
           </div>
         </div>

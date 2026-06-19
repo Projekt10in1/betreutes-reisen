@@ -8,6 +8,7 @@ import { About } from "@/pages/About";
 import { Contact } from "@/pages/Contact";
 import { Impressum } from "@/pages/Impressum";
 import { Datenschutz } from "@/pages/Datenschutz";
+import { Agb } from "@/pages/Agb";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/kontakt" component={Contact} />
       <Route path="/impressum" component={Impressum} />
       <Route path="/datenschutz" component={Datenschutz} />
+      <Route path="/agb" component={Agb} />
       <Route component={NotFound} />
     </Switch>
   );
