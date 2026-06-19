@@ -1,0 +1,1 @@
+- [Vercel deployment](vercel-deployment.md) — static Vite SPA → Vercel; the real fix was dashboard Root Dir + Output Dir override, not vercel.json; vite must not require PORT/BASE_PATH at build.
