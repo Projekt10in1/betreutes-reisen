@@ -157,6 +157,53 @@ export function LetzteReisen() {
         </div>
       </section>
 
+      {/* Aktueller Erfahrungsbericht */}
+      <section className="bg-white py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative mx-auto md:mx-0 max-w-sm w-full"
+            >
+              <div className="bg-white p-3 pb-12 shadow-xl rotate-[-2deg]">
+                <img
+                  src="/fanny-giraffe.jpg"
+                  alt="Leiterin Fanny übt mit einem Kind die Giraffe"
+                  className="w-full aspect-[3/4] object-cover"
+                />
+                <p className="mt-4 text-center text-sm font-serif italic text-amber-900/70 leading-snug px-2">
+                  Heute üben wir die Giraffe :-)
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <span className="inline-flex items-center gap-2 bg-amber-400 text-amber-950 text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full mb-5">
+                Aktuell
+              </span>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-amber-950 mb-5 leading-tight">
+                Gute Laune bei jedem Wetter
+              </h2>
+              <p className="text-lg text-amber-900/80 leading-relaxed font-serif italic mb-6">
+                „Leiterin Fanny ist auch bei schlechterem Wetter immer mit guten
+                Ideen dabei: Heute üben wir die Giraffe :-)"
+              </p>
+              <p className="text-sm font-semibold text-amber-600">
+                — Ein Moment aus unserem Reisealltag
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Foto-Album */}
       <section className="bg-slate-100 py-20 px-4">
         <div className="max-w-5xl mx-auto">
