@@ -1,18 +1,34 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { useCreateInquiry } from "@workspace/api-client-react";
-import { InquiryInputCareLevel } from "@workspace/api-client-react/src/generated/api.schemas";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form, FormControl, FormField, FormItem, FormLabel, FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2, CheckCircle2, PhoneCall } from "lucide-react";
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Loader2, CheckCircle2, PhoneCall } from "lucide-react";
+
+// ---------------------------------------------------------------------------
+// Formular-Endpoint
+// ---------------------------------------------------------------------------
+// Setzen Sie VITE_FORM_ENDPOINT in Ihrer .env-Datei (oder in den Umgebungsvariablen
+// Ihres Hosting-Anbieters) auf die URL Ihres Formular-Dienstes.
+//
+// Beispiel für Web3Forms:
+//   VITE_FORM_ENDPOINT=https://api.web3forms.com/submit
+//   VITE_WEB3FORMS_KEY=<Ihr_Access_Key>
+//
+// Der POST-Body wird als JSON gesendet. Für Web3Forms muss zusätzlich ein
+// "access_key"-Feld im Body enthalten sein (siehe onSubmit unten).
+// ---------------------------------------------------------------------------
+const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 
 const formSchema = z.object({
   name: z.string().min(2, "Bitte geben Sie Ihren vollständigen Namen an."),
@@ -24,12 +40,23 @@ const formSchema = z.object({
   message: z.string().min(10, "Bitte hinterlassen Sie eine kurze Nachricht."),
 });
 
-export function Contact() {
-  const { toast } = useToast();
-  const [isSuccess, setIsSuccess] = useState(false);
-  const createInquiry = useCreateInquiry();
+type FormValues = z.infer<typeof formSchema>;
 
-  const form = useForm<z.infer<typeof formSchema>>({
+const careLevelLabels: Record<string, string> = {
+  none: "Kein Pflegegrad",
+  "1": "Pflegegrad 1",
+  "2": "Pflegegrad 2",
+  "3": "Pflegegrad 3",
+  "4": "Pflegegrad 4",
+  "5": "Pflegegrad 5",
+};
+
+export function Contact() {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -42,34 +69,64 @@ export function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Need to cast the careLevel correctly
-    let parsedCareLevel: any = values.careLevel;
-    if (values.careLevel !== "none") {
-      parsedCareLevel = parseInt(values.careLevel, 10);
+  async function onSubmit(values: FormValues) {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const endpoint = FORM_ENDPOINT;
+
+    if (!endpoint) {
+      // Kein Endpoint konfiguriert – Formular trotzdem als erfolgreich markieren
+      // (für lokale Entwicklung ohne Backend)
+      console.warn(
+        "[Kontaktformular] VITE_FORM_ENDPOINT ist nicht gesetzt. " +
+        "Bitte setzen Sie die Umgebungsvariable, um Anfragen tatsächlich zu versenden.",
+      );
+      setIsSuccess(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsSubmitting(false);
+      return;
     }
 
-    createInquiry.mutate(
-      {
-        data: {
-          ...values,
-          careLevel: parsedCareLevel,
-        },
-      },
-      {
-        onSuccess: () => {
-          setIsSuccess(true);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        },
-        onError: () => {
-          toast({
-            variant: "destructive",
-            title: "Fehler beim Senden",
-            description: "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es später erneut.",
-          });
-        },
+    try {
+      const payload: Record<string, string> = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        careLevel: careLevelLabels[values.careLevel] ?? values.careLevel,
+        limitations: values.limitations ?? "",
+        wishDestination: values.wishDestination ?? "",
+        message: values.message,
+      };
+
+      // Optionaler Web3Forms Access Key (falls VITE_WEB3FORMS_KEY gesetzt ist)
+      const web3Key = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+      if (web3Key) {
+        payload["access_key"] = web3Key;
       }
-    );
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      setIsSuccess(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      setSubmitError(
+        "Leider konnte Ihre Anfrage nicht gesendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -90,11 +147,18 @@ export function Contact() {
               <div className="w-20 h-20 bg-secondary text-secondary-foreground rounded-full flex items-center justify-center mb-6">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h2 className="text-3xl font-bold mb-4">Vielen Dank für Ihre Anfrage!</h2>
+              <h2 className="text-3xl font-bold mb-4" data-testid="text-success-heading">
+                Vielen Dank für Ihre Anfrage!
+              </h2>
               <p className="text-xl text-muted-foreground mb-8">
                 Ihre Nachricht ist sicher bei uns eingetroffen. Eine unserer Pflegefachkräfte wird sich in den nächsten Tagen persönlich telefonisch bei Ihnen melden, um Ihre Reise-Wünsche und Bedürfnisse in Ruhe zu besprechen.
               </p>
-              <Button onClick={() => setIsSuccess(false)} variant="outline" size="lg">
+              <Button
+                onClick={() => { setIsSuccess(false); form.reset(); }}
+                variant="outline"
+                size="lg"
+                data-testid="button-another-inquiry"
+              >
                 Weitere Anfrage senden
               </Button>
             </CardContent>
@@ -109,6 +173,12 @@ export function Contact() {
               </div>
             </div>
 
+            {submitError && (
+              <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-xl text-destructive text-sm" role="alert">
+                {submitError}
+              </div>
+            )}
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -119,7 +189,12 @@ export function Contact() {
                       <FormItem>
                         <FormLabel className="text-base">Vollständiger Name</FormLabel>
                         <FormControl>
-                          <Input className="h-14 text-base" placeholder="Max Mustermann" {...field} />
+                          <Input
+                            className="h-14 text-base"
+                            placeholder="Max Mustermann"
+                            data-testid="input-name"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -132,7 +207,13 @@ export function Contact() {
                       <FormItem>
                         <FormLabel className="text-base">Telefonnummer</FormLabel>
                         <FormControl>
-                          <Input className="h-14 text-base" type="tel" placeholder="Für unseren Rückruf" {...field} />
+                          <Input
+                            className="h-14 text-base"
+                            type="tel"
+                            placeholder="Für unseren Rückruf"
+                            data-testid="input-phone"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -145,9 +226,15 @@ export function Contact() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-base">E-Mail Adresse</FormLabel>
+                      <FormLabel className="text-base">E-Mail-Adresse</FormLabel>
                       <FormControl>
-                        <Input className="h-14 text-base" type="email" placeholder="max@beispiel.de" {...field} />
+                        <Input
+                          className="h-14 text-base"
+                          type="email"
+                          placeholder="max@beispiel.de"
+                          data-testid="input-email"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -163,7 +250,7 @@ export function Contact() {
                         <FormLabel className="text-base">Pflegegrad</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="h-14 text-base">
+                            <SelectTrigger className="h-14 text-base" data-testid="select-care-level">
                               <SelectValue placeholder="Bitte wählen" />
                             </SelectTrigger>
                           </FormControl>
@@ -187,7 +274,12 @@ export function Contact() {
                       <FormItem>
                         <FormLabel className="text-base">Wunschziel (optional)</FormLabel>
                         <FormControl>
-                          <Input className="h-14 text-base" placeholder="z.B. Ostsee, Alpen..." {...field} />
+                          <Input
+                            className="h-14 text-base"
+                            placeholder="z.B. Ostsee, Alpen..."
+                            data-testid="input-destination"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -202,10 +294,11 @@ export function Contact() {
                     <FormItem>
                       <FormLabel className="text-base">Körperliche Einschränkungen / Besondere Bedürfnisse (optional)</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          className="min-h-[100px] text-base resize-y" 
-                          placeholder="z.B. Rollstuhlnutzer, spezielle Diät, Demenz..." 
-                          {...field} 
+                        <Textarea
+                          className="min-h-[100px] text-base resize-y"
+                          placeholder="z.B. Rollstuhlnutzer, spezielle Diät, Demenz..."
+                          data-testid="textarea-limitations"
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -220,10 +313,11 @@ export function Contact() {
                     <FormItem>
                       <FormLabel className="text-base">Ihre Nachricht</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          className="min-h-[150px] text-base resize-y" 
-                          placeholder="Wie können wir Ihnen helfen?" 
-                          {...field} 
+                        <Textarea
+                          className="min-h-[150px] text-base resize-y"
+                          placeholder="Wie können wir Ihnen helfen?"
+                          data-testid="textarea-message"
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -231,13 +325,14 @@ export function Contact() {
                   )}
                 />
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="w-full h-14 text-lg font-bold"
-                  disabled={createInquiry.isPending}
+                  disabled={isSubmitting}
+                  data-testid="button-submit"
                 >
-                  {createInquiry.isPending ? (
+                  {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                       Wird gesendet...

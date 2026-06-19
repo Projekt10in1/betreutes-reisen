@@ -1,19 +1,22 @@
+import { useState, useMemo } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { useListTrips } from "@workspace/api-client-react";
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { trips, type Quarter } from "@/data/trips";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, MapPin, Accessibility, Footprints, HeartPulse, Loader2, Euro } from "lucide-react";
+import { CalendarDays, MapPin, Accessibility, Footprints, HeartPulse, Euro } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
-export function Catalog() {
-  const [selectedQuarter, setSelectedQuarter] = useState<ListTripsQuarter | "ALL">("ALL");
+type Filter = Quarter | "ALL";
 
-  const { data: trips, isLoading } = useListTrips(
-    selectedQuarter === "ALL" ? {} : { quarter: selectedQuarter }
+export function Catalog() {
+  const [selectedQuarter, setSelectedQuarter] = useState<Filter>("ALL");
+
+  const filtered = useMemo(
+    () => selectedQuarter === "ALL" ? trips : trips.filter((t) => t.quarter === selectedQuarter),
+    [selectedQuarter],
   );
 
   return (
@@ -28,7 +31,7 @@ export function Catalog() {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <Tabs defaultValue="ALL" value={selectedQuarter} onValueChange={(v) => setSelectedQuarter(v as any)}>
+        <Tabs value={selectedQuarter} onValueChange={(v) => setSelectedQuarter(v as Filter)}>
           <div className="flex justify-center mb-8">
             <TabsList className="h-14">
               <TabsTrigger value="ALL" className="text-lg px-6 h-12">Alle Reisen</TabsTrigger>
@@ -40,59 +43,52 @@ export function Catalog() {
           </div>
 
           <div className="min-h-[400px]">
-            {isLoading ? (
-              <div className="flex justify-center items-center h-64">
-                <Loader2 className="w-12 h-12 animate-spin text-primary" />
-              </div>
-            ) : trips && trips.length > 0 ? (
+            {filtered.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {trips.map((trip, index) => (
+                {filtered.map((trip, index) => (
                   <motion.div
                     key={trip.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-primary/20">
+                    <Card
+                      data-testid={`card-trip-${trip.id}`}
+                      className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-primary/20"
+                    >
                       <div className="relative h-56 bg-muted">
-                        <img 
-                          src={trip.imageUrl || "/trip-alps.png"} 
+                        <img
+                          src={trip.imageUrl}
                           alt={trip.title}
                           className="absolute inset-0 w-full h-full object-cover"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = "/trip-beach.png";
-                          }}
                         />
-                        <div className="absolute top-4 right-4 flex flex-col gap-2">
+                        <div className="absolute top-4 right-4">
                           <Badge variant="secondary" className="bg-background/90 backdrop-blur font-bold text-sm px-3 py-1">
                             {trip.quarter}
                           </Badge>
                         </div>
                       </div>
+
                       <CardHeader>
-                        <div className="flex justify-between items-start mb-2">
-                          <div className="flex gap-2 text-sm text-muted-foreground">
-                            {trip.destination && (
-                              <span className="flex items-center gap-1">
-                                <MapPin className="w-4 h-4" />
-                                {trip.destination}
-                              </span>
-                            )}
-                            {trip.duration && (
-                              <span className="flex items-center gap-1">
-                                <CalendarDays className="w-4 h-4" />
-                                {trip.duration}
-                              </span>
-                            )}
-                          </div>
+                        <div className="flex gap-4 text-sm text-muted-foreground mb-2">
+                          {trip.destination && (
+                            <span className="flex items-center gap-1">
+                              <MapPin className="w-4 h-4" />
+                              {trip.destination}
+                            </span>
+                          )}
+                          {trip.duration && (
+                            <span className="flex items-center gap-1">
+                              <CalendarDays className="w-4 h-4" />
+                              {trip.duration}
+                            </span>
+                          )}
                         </div>
-                        <CardTitle className="text-2xl">{trip.title}</CardTitle>
+                        <CardTitle className="text-xl">{trip.title}</CardTitle>
                       </CardHeader>
+
                       <CardContent className="flex-grow">
-                        <p className="text-muted-foreground mb-6 line-clamp-3">
-                          {trip.description}
-                        </p>
-                        
+                        <p className="text-muted-foreground mb-6 line-clamp-3">{trip.description}</p>
                         <div className="space-y-3">
                           <h4 className="font-semibold text-sm">Barrierefreiheit & Pflege:</h4>
                           <div className="flex flex-wrap gap-2">
@@ -114,6 +110,7 @@ export function Catalog() {
                           </div>
                         </div>
                       </CardContent>
+
                       <CardFooter className="flex justify-between items-center bg-muted/30 pt-6">
                         <div className="flex items-center font-bold text-xl">
                           {trip.price ? (
@@ -124,7 +121,9 @@ export function Catalog() {
                           ) : "Auf Anfrage"}
                         </div>
                         <Link href={`/kontakt?trip=${trip.id}`}>
-                          <Button className="font-bold">Anfragen</Button>
+                          <Button className="font-bold" data-testid={`button-inquire-${trip.id}`}>
+                            Anfragen
+                          </Button>
                         </Link>
                       </CardFooter>
                     </Card>
