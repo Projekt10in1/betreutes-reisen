@@ -35,8 +35,8 @@ export function Header() {
 
         <nav className="hidden md:flex items-center gap-1">
           <Link href="/" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Startseite</Link>
-          <Link href="/reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Reisen</Link>
-          <Link href="/letzte-reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Erfahrungen</Link>
+          <Link href="/reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Reisen 2026</Link>
+          <Link href="/letzte-reisen" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">letzte Reisen</Link>
           <Link href="/ueber-uns" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Über uns</Link>
           <Link href="/kontakt" className="text-base font-medium hover:text-primary transition-colors py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-ring">Kontakt</Link>
         </nav>

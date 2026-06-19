@@ -16,7 +16,8 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-base mb-4 text-white uppercase tracking-wider">Kontakt</h3>
             <address className="not-italic text-slate-400 space-y-2 flex flex-col">
-              <p>Musterstraße 123</p>
+              <p>betreutes-reisen.org
+</p>
               <p>10115 Berlin</p>
               <a href="tel:+49123456789" className="hover:text-amber-400 transition-colors py-1 inline-block">Tel: +49 (0) 123 456 789</a>
               <a href="mailto:hallo@betreutes-reisen.org" className="hover:text-amber-400 transition-colors py-1 inline-block">hallo@betreutes-reisen.org</a>

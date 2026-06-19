@@ -10,6 +10,7 @@ import { Impressum } from "@/pages/Impressum";
 import { Datenschutz } from "@/pages/Datenschutz";
 import { Agb } from "@/pages/Agb";
 import { LetzteReisen } from "@/pages/LetzteReisen";
+import { PasswordGate, usePasswordGate } from "@/components/PasswordGate";
 
 function Router() {
   return (
@@ -28,11 +29,17 @@ function Router() {
 }
 
 function App() {
+  const { isAuthenticated, unlock } = usePasswordGate();
+
   return (
     <TooltipProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <Router />
-      </WouterRouter>
+      {isAuthenticated ? (
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <Router />
+        </WouterRouter>
+      ) : (
+        <PasswordGate onUnlock={unlock} />
+      )}
       <Toaster />
     </TooltipProvider>
   );
