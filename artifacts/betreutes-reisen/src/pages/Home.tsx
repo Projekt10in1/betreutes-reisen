@@ -12,8 +12,8 @@ export function Home() {
       <section className="relative h-screen min-h-[600px] flex items-center justify-center text-center px-4">
         <div className="absolute inset-0 z-0">
           <img
-            src="/hero.png"
-            alt="Älteres Paar lacht im Park mit einer Pflegerin"
+            src="/hero.jpg"
+            alt="Person im Rollstuhl am Strand beim Sonnenuntergang mit Betreuerin"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-amber-950/60 via-amber-900/50 to-amber-950/70 mix-blend-multiply" />
