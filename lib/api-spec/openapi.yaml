@@ -1,22 +1,24 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: betreutes-reisen.org API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: trips
+    description: Travel catalog operations
+  - name: inquiries
+    description: Contact inquiry operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +26,111 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /trips:
+    get:
+      operationId: listTrips
+      tags: [trips]
+      summary: List all trips
+      parameters:
+        - name: quarter
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [Q1, Q2, Q3, Q4]
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [long, short]
+      responses:
+        "200":
+          description: List of trips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Trip"
+
+  /trips/{id}:
+    get:
+      operationId: getTrip
+      tags: [trips]
+      summary: Get a single trip
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Trip found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trip"
+        "404":
+          description: Not found
+
+  /trips/summary:
+    get:
+      operationId: getTripsSummary
+      tags: [trips]
+      summary: Get aggregate counts of trips by quarter and type
+      responses:
+        "200":
+          description: Trip summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripsSummary"
+
+  /inquiries:
+    post:
+      operationId: createInquiry
+      tags: [inquiries]
+      summary: Submit a new contact inquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryInput"
+      responses:
+        "201":
+          description: Inquiry created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Validation error
+    get:
+      operationId: listInquiries
+      tags: [inquiries]
+      summary: List all inquiries (admin only)
+      parameters:
+        - name: adminPassword
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of inquiries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inquiry"
+        "401":
+          description: Unauthorized
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +141,100 @@ components:
       required:
         - status
 
+    Trip:
+      type: object
+      required: [id, title, description, quarter, type, imageUrl, wheelchairAccessible, walkingAidFriendly, highCareNeed]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        quarter:
+          type: string
+          enum: [Q1, Q2, Q3, Q4]
+        type:
+          type: string
+          enum: [long, short]
+        imageUrl:
+          type: string
+        duration:
+          type: ["string", "null"]
+        destination:
+          type: ["string", "null"]
+        price:
+          type: ["string", "null"]
+        wheelchairAccessible:
+          type: boolean
+        walkingAidFriendly:
+          type: boolean
+        highCareNeed:
+          type: boolean
+
+    TripsSummary:
+      type: object
+      required: [totalTrips, longTrips, shortTrips, byQuarter]
+      properties:
+        totalTrips:
+          type: integer
+        longTrips:
+          type: integer
+        shortTrips:
+          type: integer
+        byQuarter:
+          type: array
+          items:
+            type: object
+            required: [quarter, count]
+            properties:
+              quarter:
+                type: string
+              count:
+                type: integer
+
+    InquiryInput:
+      type: object
+      required: [name, email, phone, careLevel, message]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        careLevel:
+          type: string
+          enum: [none, 1, 2, 3, 4, 5]
+        limitations:
+          type: string
+        wishDestination:
+          type: string
+        message:
+          type: string
+
+    Inquiry:
+      type: object
+      required: [id, name, email, phone, careLevel, message, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        careLevel:
+          type: string
+        limitations:
+          type: ["string", "null"]
+        wishDestination:
+          type: ["string", "null"]
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time

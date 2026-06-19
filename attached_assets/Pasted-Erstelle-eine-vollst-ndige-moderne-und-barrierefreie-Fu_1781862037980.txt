@@ -1,0 +1,48 @@
+Erstelle eine vollständige, moderne und barrierefreie Full-Stack-Webanwendung (vorzugsweise mit React, Vite und Tailwind CSS im Frontend sowie Node.js/Express im Backend) für ein spezialisiertes Reiseunternehmen namens "betreutes-reisen.org". 
+
+Das Angebot richtet sich an Pflegebedürftige, Menschen mit Einschränkungen und deren Angehörige. Die Reisen werden von ausgebildeten deutschen Pflege- und Betreuungsfachkräften begleitet. Die Website muss Professionalität, Wärme, Barrierefreiheit und hohes Vertrauen ausstrahlen.
+
+### 1. Design, Farben & Branding
+- Grundstimmung: Modern, hell, einladend und optimistisch.
+- Farbpalette: Hauptfarbe ist ein warmes, strahlendes Sonnengelb (z.B. für Akzente, primäre Buttons, Highlights). Sekundärfarbe ist ein sanftes Lindgrün (für beruhigende Elemente, Erfolgsmeldungen oder sekundäre Badges). Hintergrund überwiegend hell/weiß/hellgrau für maximale Lesbarkeit.
+- Logo: Erstelle im Header ein schönes, minimalistisches SVG-Logo (Text + Icon), das die Themen Hand, Herz und Mobilität (z.B. ein stilisiertes Rad oder eine Reisewelle) elegant miteinander verbindet.
+
+### 2. Barrierefreiheit (Accessibility - A11y)
+Da die Zielgruppe ältere Menschen oder Menschen mit Einschränkungen sind, implementiere zwingend:
+- Einen "Schriftgröße anpassen"-Button (A+ / A-) gut sichtbar im Header, der die Schriftgröße der gesamten Seite dynamisch skaliert.
+- Hohe Kontraste (Text zu Hintergrund), die den WCAG-Richtlinien entsprechen.
+- Semantisches HTML und ARIA-Labels für Screenreader.
+- Große, leicht klickbare Buttons und interaktive Elemente.
+
+### 3. Seitenstruktur & Navigation
+Die Website soll als Multi-Page-App oder Single-Page-App mit sauberem Routing folgende Sektionen/Seiten haben:
+
+#### A. Startseite (Home)
+- Große Hero-Sektion mit einer klaren Botschaft (z. B. "Gemeinsam die Welt entdecken – Sicher, betreut und voller Lebensfreude").
+- Vertrauensaufbau-Sektion: Großes Highlight, dass die Begleitung durch *ausgebildete deutsche Fachkräfte aus der Pflege und Betreuung* stattfindet.
+- Kurze Vorstellung des Konzepts.
+
+#### B. Über uns / Unser Team
+- Sympathische Vorstellung des Teams und der Motivation dahinter (Umsetzung des vielfachen Wunschs aus der täglichen Pflegepraxis heraus).
+- Fokus auf Empathie, Sicherheit und Professionalität.
+
+#### C. Reisekatalog (Das Angebot)
+- Strukturiere den Katalog nach einer ansprechenden Jahresaufteilung (Quartale: Q1, Q2, Q3, Q4).
+- Füge für die Quartale Platzhalter-Reisen ein mit schönen Beispielbildern (nutze Unsplash-URLs für Platzhalter).
+- Jedes Quartal soll enthalten:
+  - 2 Fernreisen (Beispiel: "10 Tage Algarve mit barrierefreier Stadtbesichtigung").
+  - 6 Kurztrips/Tagesausflüge (Beispiele: "Wunschkonzert-Besuch", "Ausflug zum Pferderennen", etc.).
+- Jede Reisekarte (Card) muss visuelle, leicht verständliche Symbole/Icons für die Teilnahmemöglichkeit enthalten (z. B. ein Rollstuhl-Icon für "Rollstuhlgeeignet", ein Gehstock-Icon für "Für Gehhilfen geeignet", ein Herz-Icon für "Erhöhter Betreuungsbedarf möglich").
+
+#### D. Kontakt & "Kennenlern-Anfrage"
+- Kein anonymes Massenbuchungssystem! Es soll eine persönliche "Kennenlern-Anfrage" sein.
+- Erstelle ein interaktives, barrierefreies Anfrageformular mit folgenden spezifischen Feldern:
+  1. Name & Kontaktdaten (E-Mail, Telefonnummer).
+  2. Dropdown oder Radio-Buttons: "Welcher Pflegegrad liegt vor?" (Optionen: Kein Pflegegrad, Pflegegrad 1, 2, 3, 4, 5).
+  3. Textfeld/Textarea: "Welche Einschränkungen oder besonderen Bedürfnisse gibt es?"
+  4. Textfeld: "Was ist Ihr Wunschziel?"
+  5. Textfeld: "Ihre Nachricht an uns".
+- Bei erfolgreichem Absenden des Formulars soll eine herzliche Bestätigungsmeldung erscheinen, die erklärt, dass man sich zeitnah für ein persönliches Gespräch meldet.
+- Speichere die Anfragen in einer einfachen Datenbank (z.B. SQLite oder ein JSON-File über das Express-Backend) und zeige sie auf einer passwortgeschützten Admin-Ansicht (`/admin`) an, damit die Betreiber die Anfragen einsehen können.
+
+Bitte beginne mit der Erstellung des Projekts und zeige mir die Fortschritte.

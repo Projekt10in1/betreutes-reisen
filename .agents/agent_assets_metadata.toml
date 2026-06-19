@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "lq9SZoGAB01_VK35O-xPj"
+uri = "file://artifacts/betreutes-reisen/public/hero.png"
+type = "image"
+title = "Hero image with elderly couple"
+
+[[generated]]
+id = "sb_isfeEl3pxlMsyrSNxb"
+uri = "file://artifacts/betreutes-reisen/public/team.png"
+type = "image"
+title = "Team portrait"
+
+[[generated]]
+id = "_Sx9EuESbHPoYCTF88VFL"
+uri = "file://artifacts/betreutes-reisen/public/trip-beach.png"
+type = "image"
+title = "Elderly couple at the beach"
+
+[[generated]]
+id = "zl_BVZcjN3WOf7kAOI0Mh"
+uri = "file://artifacts/betreutes-reisen/public/trip-alps.png"
+type = "image"
+title = "Seniors in the Alps"
+
+[[generated]]
+id = "nOiKeF23FQQK9JGyB4wJJ"
+uri = "file://artifacts/betreutes-reisen/public/trip-spa.png"
+type = "image"
+title = "Spa resort for seniors"
