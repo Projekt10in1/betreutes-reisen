@@ -45,7 +45,7 @@ export function About() {
             >
               <div className="absolute inset-0 bg-amber-200/40 transform translate-x-4 translate-y-4 rounded-2xl" />
               <img
-                src="/team.png"
+                src="/fanny-nico.jpg"
                 alt="Unser Pflegeteam"
                 className="relative z-10 rounded-2xl shadow-xl w-full object-cover aspect-[4/3]"
               />
