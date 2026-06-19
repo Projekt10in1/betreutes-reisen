@@ -6,6 +6,8 @@ import { Home } from "@/pages/Home";
 import { Catalog } from "@/pages/Catalog";
 import { About } from "@/pages/About";
 import { Contact } from "@/pages/Contact";
+import { Impressum } from "@/pages/Impressum";
+import { Datenschutz } from "@/pages/Datenschutz";
 
 function Router() {
   return (
@@ -14,6 +16,8 @@ function Router() {
       <Route path="/reisen" component={Catalog} />
       <Route path="/ueber-uns" component={About} />
       <Route path="/kontakt" component={Contact} />
+      <Route path="/impressum" component={Impressum} />
+      <Route path="/datenschutz" component={Datenschutz} />
       <Route component={NotFound} />
     </Switch>
   );

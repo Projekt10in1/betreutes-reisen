@@ -27,13 +27,7 @@ export function Footer() {
                 <Link href="/impressum" className="text-muted-foreground hover:text-primary transition-colors py-2 block">Impressum</Link>
               </li>
               <li>
-                <Link href="/datenschutz" className="text-muted-foreground hover:text-primary transition-colors py-2 block">Datenschutz</Link>
-              </li>
-              <li>
-                <Link href="/agb" className="text-muted-foreground hover:text-primary transition-colors py-2 block">AGB</Link>
-              </li>
-              <li>
-                <Link href="/admin" className="text-muted-foreground hover:text-primary transition-colors py-2 block">Admin-Login</Link>
+                <Link href="/datenschutz" className="text-muted-foreground hover:text-primary transition-colors py-2 block">Datenschutzerklärung</Link>
               </li>
             </ul>
           </div>

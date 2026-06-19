@@ -11,9 +11,11 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, CheckCircle2, PhoneCall } from "lucide-react";
+import { Link } from "wouter";
 
 // ---------------------------------------------------------------------------
 // Formular-Endpoint
@@ -38,6 +40,9 @@ const formSchema = z.object({
   limitations: z.string().optional(),
   wishDestination: z.string().optional(),
   message: z.string().min(10, "Bitte hinterlassen Sie eine kurze Nachricht."),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Bitte stimmen Sie der Datenschutzeinwilligung zu, um die Anfrage absenden zu können." }),
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -66,6 +71,7 @@ export function Contact() {
       limitations: "",
       wishDestination: "",
       message: "",
+      consent: undefined,
     },
   });
 
@@ -320,6 +326,41 @@ export function Contact() {
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="consent"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col gap-3 rounded-xl border border-border bg-muted/40 p-5">
+                      <div className="flex items-start gap-3">
+                        <FormControl>
+                          <Checkbox
+                            id="consent"
+                            checked={field.value === true}
+                            onCheckedChange={(checked) => field.onChange(checked === true ? true : undefined)}
+                            className="mt-1 h-5 w-5 shrink-0"
+                            data-testid="checkbox-consent"
+                            aria-required="true"
+                          />
+                        </FormControl>
+                        <FormLabel
+                          htmlFor="consent"
+                          className="text-sm leading-relaxed font-normal cursor-pointer"
+                        >
+                          Ich willige ein, dass meine Angaben (einschließlich meiner Gesundheitsdaten wie Pflegegrad und Einschränkungen) zur Bearbeitung meiner Anfrage verarbeitet werden. Hinweis: Sie können diese Einwilligung jederzeit für die Zukunft per E-Mail widerrufen. Weitere Informationen finden Sie in unserer{" "}
+                          <Link
+                            href="/datenschutz"
+                            className="text-primary underline underline-offset-2 hover:text-primary/80"
+                          >
+                            Datenschutzerklärung
+                          </Link>
+                          .
+                        </FormLabel>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
