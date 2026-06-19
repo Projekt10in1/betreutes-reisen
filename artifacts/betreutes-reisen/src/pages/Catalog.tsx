@@ -23,13 +23,12 @@ export function Catalog() {
     <Layout>
       <div className="bg-accent/20 py-12 border-b">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Reisekatalog</h1>
+          <h1 className="text-4xl font-bold mb-4">Reisekatalog 2026</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Finden Sie die perfekte begleitete Reise für Ihre Bedürfnisse. Alle Reisen werden von qualifizierten Pflegekräften begleitet.
           </p>
         </div>
       </div>
-
       <div className="container mx-auto px-4 py-12">
         <Tabs value={selectedQuarter} onValueChange={(v) => setSelectedQuarter(v as Filter)}>
           <div className="flex justify-center mb-8">
